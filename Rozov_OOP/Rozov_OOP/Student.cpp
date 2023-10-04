@@ -1,8 +1,5 @@
 #include "Student.h"
-#include <iostream>
-#include <string>
-
-using namespace std;
+#include "utils.h"
 
 int Student::student_max_id = 0;
 
@@ -34,15 +31,32 @@ istream& operator>>(istream& is, Student& student)
 
 ofstream& operator<<(ofstream& out, const Student& student)
 {
-	out << student.name_of_student << endl
+	out << student.Id_of_student << endl
+		<< student.name_of_student << endl
 		<< student.group << endl
 		<< student.age << endl
-		<< student.average_rating << endl
-		<< student.Id_of_student << endl;
+		<< student.average_rating << endl;
+		
 	return out;
 }
 
 ifstream& operator>>(ifstream& in, Student& student)
 {
-	
+	in >> student.Id_of_student;
+	in.ignore();
+	getline(in, student.name_of_student);
+	getline(in, student.group);
+	in >> student.age;
+	in >> student.average_rating;
+
+	return in;
+}
+int Student::GetID() const
+{
+	return Id_of_student;
+}
+
+void Student::SetID()
+{
+	Id_of_student = ++student_max_id;
 }

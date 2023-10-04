@@ -1,15 +1,11 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <ostream>
 #include "utils.h"
 using namespace std;
 
 
 class Student {
 
-private:
+protected:
 	int Id_of_student;
 
 public:
@@ -24,4 +20,8 @@ public:
 	friend istream& operator >>(istream& is, Student& student);
 	friend ofstream& operator << (ofstream& out, const Student& student);
 	friend ifstream& operator >> (ifstream& in, Student& student);
+	
+	int GetID() const;
+	void SetID();
+	
 }
