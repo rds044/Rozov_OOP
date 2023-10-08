@@ -1,18 +1,21 @@
 #pragma once
 #include "Student.h"
-#include "utils.h"
+
 #include <vector>
 using namespace std;
 
-class Group{
-	protected:
-		vector<Student*> group_list;
+class Rozov_Group{
+private:
+	vector<Rozov_Student*> group_list;
 public:
 
-	
+	void Input_student();
 
-	void InputBook();
+	void PrintAllStudents();
 
-	void PrintAllFilms();
+	void Save(const std::string& filename);
 
-}
+	void Download(std::string filename);
+
+	void DeleteAll();
+};

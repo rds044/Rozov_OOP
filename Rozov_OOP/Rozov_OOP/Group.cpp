@@ -3,66 +3,75 @@
 #include "Group.h"
 
 
-void Group::InputBook()
+
+void Rozov_Group::Input_student()
 {
-	Student Varriable_student;
-	cin >> Varriable_student;
-	group_list.push_back(new Group(Varriable_student));
+	Rozov_Student* Varriable_student = new Rozov_Student();
+	cin >> *Varriable_student;
+	group_list.push_back(Varriable_student);
+	//delete Varriable_student;
 }
 
-void Group::PrintAllFilms()
+void Rozov_Group::PrintAllStudents()
 {
-	if (grouз_list.size() != 0)
+	if (!group_list.empty())
 	{
-		for (const auto* film : grou_list)
-			cout << *film << endl;
+		for (const auto* student : group_list) {
+			cout << *student << endl;
+		}
 	}
 	else
 		cout << "Нет данных по группе, попробуйте снова" << endl;
 }
 
-void Group::Save(const std::string& filename)
+void Rozov_Group::Save(const std::string& filename)
 {
 	ofstream fout;
 	fout.open(filename);
 	if (fout.is_open())
 	{
-		fout << film_list.size() << endl;
-		for (const auto* film : film_list)
-			fout << *film;
+		fout << group_list.size() << endl;
+		for (const auto* student: group_list)
+			fout << *student;
 		fout.close();
 	}
 	else
 		cout << "Произошла ошибка, файл не был открыт. Попробуйте снова!" << endl;
 }
 
-void Group::Download(std::string filename)
+void Rozov_Group::Download(string filename)
 {
 	ifstream fin;
 	fin.open(filename);
 	if (fin.is_open())
 	{
-		Kamalova_film film;
-		int list_size, id = 1,
+		
+		int list_size, id = 1;
 			fin >> list_size;
 
 		for (int i = 1; i <= list_size; i++)
 		{
-			fin >> film;
-			for (auto& f : film_list)
+			Rozov_Student* Varriable_student = new Rozov_Student();
+			fin >> *Varriable_student;
+			bool duplicateID = false;
+			for (const auto& student : group_list)
 			{
-				if (film.GetID() == id)
+				if (student->GetID() == id)
 				{
-					kol++;
-					id++;
+					id++;			
+					
+							
 				}
 			}
-			if (kol == 0)
-			{
-				film.MaxID++;
-				film_list.push_back(new Kamalova_film(film));
-			}
 
+			if (duplicateID == false)
+			{Varriable_student->SetID();
+				group_list.push_back(Varriable_student);
+			}
+			else 
+			{	
+            delete Varriable_student; // Освобождаем память при дубликате ID
+            }
 		}
 		fin.close();
 	}
@@ -70,11 +79,11 @@ void Group::Download(std::string filename)
 		cout << "Файл не был открыт! Попробуйте снова!";
 }
 
-void Group::DeleteAll()
+void Rozov_Group::DeleteAll()
 {
-	for (const auto* film : film_list)
+	for (const auto* film : group_list)
 	{
 		delete film;
 	}
-	film_list.clear();
+	group_list.clear();
 }
