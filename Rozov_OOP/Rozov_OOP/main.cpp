@@ -47,7 +47,7 @@ int main()
 			string filename;
 			cin >> ws;
 			getline(cin, filename);
-			group_list.Save(filename);
+			group_list.Save(filename + ".txt");
 			break;
 		}
 		case 4:
@@ -56,7 +56,7 @@ int main()
 			string filename;
 			cin >> ws;
 			getline(cin, filename);
-			group_list.Download(filename);
+			group_list.Download(filename +".txt");
 			break;
 		}
 		case 5:
