@@ -1,27 +1,26 @@
 #pragma once
 #include "utils.h"
+#include <afx.h>
+#include <cstring>
 using namespace std;
+//#pragma region MFC 
 
+class Rozov_Student : public CObject {
 
-class Rozov_Student {
-
-private:
-	int Id_of_student;
-
-public:
-	Rozov_Student();
-	string name_of_student;
-	string group;
-	double average_rating;
+	protected:
+	
 	int age;
-	static int student_max_id;
+	float average_rating;
+	CString name_of_student;
+	CString group;
 
-	friend ostream& operator <<(ostream& os, const Rozov_Student& student);
-	friend istream& operator >>(istream& is, Rozov_Student& student);
-	friend ofstream& operator << (ofstream& out, const Rozov_Student& student);
-	friend ifstream& operator >> (ifstream& in, Rozov_Student& student);
+	public:
+	DECLARE_SERIAL(Rozov_Student);
+	void ReadFromConsole();
+	void WriteToConsole();
 
-	int GetID() const;
-	void SetID();
+	Rozov_Student();
+	void Serialize(CArchive& archive);
+		
 
 };
